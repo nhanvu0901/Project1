@@ -10,18 +10,12 @@ import './App.css'
 const App =()=> {
   const currentUser = useAuth();
  
-
-  
-
   if(!currentUser) {
     return <LoginForm/>
   }
-
     return (
-     
       <div>  
         <h1>Hello World</h1>
-      
       </div>
     );
 

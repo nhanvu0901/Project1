@@ -61,3 +61,60 @@
     color: #fd0707;
     transition: 250ms ease-in-out;
   }
+  .avatar {
+    vertical-align: middle;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border-width: 5px;
+    border-color: gray;
+    border-style: outset;
+  }
+
+  .avatar-edit{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 2rem;
+  }
+  .avatar-edit input {
+    display: none;
+ }
+ .avatar-edit input + label {
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 0;
+  border-radius: 100%;
+  background: #FFFFFF;
+  border: 1px solid transparent;
+  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.12);
+  cursor: pointer;
+  font-weight: normal;
+  transition: all .2s ease-in-out;
+  position: relative;
+  top: -6px;
+  left: -22px;
+}
+.avatar-edit input + label:hover {
+  background: #f1f1f1;
+  border-color: #d6d6d6;
+}
+.avatar-upload .avatar-edit input + label:after {
+  
+  color: #757575;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin: auto;
+}
+
+.avatar-edit label svg{
+  text-align: center;
+  font-size: 1.7rem;
+  position: relative;
+  left: 2px;
+  cursor: pointer;
+  bottom: -1px;
+}
