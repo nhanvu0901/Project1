@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRef, useState,useEffect } from "react";
 
+import { signup, login, logout, useAuth } from "../../firebase";
 import './Login.css'
 
 import {  useNavigate} from 'react-router-dom';
@@ -16,7 +17,16 @@ const Login  = () => {
   const [errorMessageCode,setErrorMeessageCode] = useState(null)
 
 
-  
+  useEffect(() => {
+    if(errorMessageCode){
+      const timer = setTimeout(() => {
+        
+        setErrorMeessageCode('');
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+    
+  }, [errorMessageCode]);
 
   async function handleLogin() {
     
@@ -56,14 +66,12 @@ const Login  = () => {
       <h2>Login</h2>
       <form>
         <div className="user-box">
-        <label>Username</label>
           <input  ref={emailRef} placeholder="Email"/>
-          
+          <label>Username</label>
         </div>
         <div className="user-box">
-        <label>Password</label>
           <input ref={passwordRef} type="password" placeholder="Password"/>
-         
+          <label>Password</label>
         </div>
 
         <div className="user-box">

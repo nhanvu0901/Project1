@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil } from '@fortawesome/free-solid-svg-icons';
 import './Login.css'
 import { useNavigate } from 'react-router-dom';
-import  {  doc, setDoc } from "firebase/firestore"; 
+import  { collection, doc, setDoc } from "firebase/firestore"; 
 import {  upload } from "../../firebase";
 import { getAuth, updateProfile,createUserWithEmailAndPassword } from "firebase/auth"; 
 const SignUp  = ({}) => {
@@ -42,9 +42,16 @@ const SignUp  = ({}) => {
     const name = nameRef.current.value;
     const password = passwordRef.current.value;
 
+   
+    
+   
     if (email && name && password && photo ) {
       registerUser(email, name, password).then(() => {
-  
+          
+      
+
+
+        
       })
     }
     else{
@@ -132,20 +139,17 @@ const SignUp  = ({}) => {
       
       
         <div className="user-box">
-        <label>Username</label>
           <input  ref={emailRef} placeholder="Email"/>
-         
+          <label>Username</label>
         </div>
         <div className="user-box">
-         <label>Password</label>
           <input ref={passwordRef} type="password" placeholder="Password"/>
-         
+          <label>Password</label>
         </div>
 
         <div className="user-box">
-         <label>User's nick name</label>
           <input ref={nameRef} placeholder="Name"/>
-          
+          <label>User's nick name</label>
         </div>
 
         <div className="user-box">
