@@ -2,15 +2,22 @@
 import LoginForm from './components/login/LoginForm';
 import React, { useEffect } from 'react';
 import { useAuth } from './firebase';
-import { useNavigate } from 'react-router-dom';
 import { logout } from "./firebase";
 import './App.css'
 
 
 const App =()=> {
   const currentUser = useAuth();
- 
 
+ async function handleLogout() {
+
+    try {
+      await logout();
+    } catch {
+      alert("Error!");
+    }
+
+  }
   
 
   if(!currentUser) {
@@ -21,7 +28,7 @@ const App =()=> {
      
       <div>  
         <h1>Hello World</h1>
-      
+        <button onClick={handleLogout}>Log out</button>
       </div>
     );
 
