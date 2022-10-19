@@ -60,7 +60,7 @@ const SignUp  = ({}) => {
       const {
         user
       } = await createUserWithEmailAndPassword(auth, email, password)
-      navigate('/profile')
+
 
       setDoc(doc(db, "user", user.uid), {
         uid:user.uid,

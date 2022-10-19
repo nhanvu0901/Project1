@@ -23,7 +23,7 @@ const Login  = () => {
     await signInWithEmailAndPassword(auth, emailRef.current.value, passwordRef.current.value).then((userCredential) => {
     
       const user = userCredential.user;
-      return navigate('/profile')
+
     })
     .catch(err => {
       let inform =" ";
