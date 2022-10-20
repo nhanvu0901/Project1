@@ -55,11 +55,25 @@ const SignUp  = ({}) => {
   
   const registerUser = async (email, name, password) => {
     try {
-      console.log("> Registering user")
-      
+
+
       const {
         user
-      } = await createUserWithEmailAndPassword(auth, email, password)
+      } = await createUserWithEmailAndPassword(auth, email, password).catch(err => {
+
+      let inform =" ";
+      if(err.message ==='Firebase: Error (auth/email-already-in-use).'){
+        inform = "Email already in use";
+      }
+      else if(err.message ==='Firebase: Password should be at least 6 characters (auth/weak-password).'){
+        inform = "Password should be at least 6 characters"
+      }
+
+      console.log(err.message);
+
+      setErrorMeessageCode(inform)
+      return null
+    })
 
 
       setDoc(doc(db, "user", user.uid), {
@@ -72,20 +86,22 @@ const SignUp  = ({}) => {
       if(photo){
         await upload(photo, user, setLoading);
       }
-      
+
 
       console.log("> Updating profile")
       await updateProfile(user, {
         displayName: name,
-        
+
       });
-      
-    
+
+
 
     } catch (e) {
       console.log(e)
     }
-  
+
+    navigate('/profile')
+
     
   }
 
