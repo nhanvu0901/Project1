@@ -48,11 +48,7 @@ const SignUp  = ({}) => {
    
     if (email && name && password && photo ) {
       registerUser(email, name, password).then(() => {
-          
-      
 
-
-        
       })
     }
     else{
@@ -67,11 +63,8 @@ const SignUp  = ({}) => {
 
       const {
         user
-      } = await createUserWithEmailAndPassword(auth, email, password).then(()=>{
+      } = await createUserWithEmailAndPassword(auth, email, password).catch(err => {
 
-      })
-      .catch(err => {
-      setSpin(false)
       let inform =" ";
       if(err.message ==='Firebase: Error (auth/email-already-in-use).'){
         inform = "Email already in use";
@@ -81,10 +74,11 @@ const SignUp  = ({}) => {
       }
 
       console.log(err.message);
+      setSpin(false)
       setErrorMeessageCode(inform)
-
+      return null
     })
-      navigate('/profile')
+
 
       setDoc(doc(db, "user", user.uid), {
         uid:user.uid,
@@ -103,13 +97,15 @@ const SignUp  = ({}) => {
         displayName: name,
 
       });
-      
-    
+
+
 
     } catch (e) {
       console.log(e)
     }
-  
+    if(spin ==false ){
+      navigate('/profile')
+    }
     
   }
 
