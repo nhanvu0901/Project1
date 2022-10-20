@@ -11,7 +11,7 @@ import SignUp from './SignUp';
 import Title from '../title/Title';
 const LoginForm  = () => {
   return (
-  <div class="login-form">  
+  <div id="login-form">
     <Title title={'Login to your Firebase album picture'}/>
         
         <Routes>

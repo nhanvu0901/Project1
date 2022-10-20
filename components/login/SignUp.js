@@ -7,7 +7,8 @@ import './Login.css'
 import { useNavigate } from 'react-router-dom';
 import  { collection, doc, setDoc } from "firebase/firestore"; 
 import {  upload } from "../../firebase";
-import { getAuth, updateProfile,createUserWithEmailAndPassword } from "firebase/auth"; 
+import { getAuth, updateProfile,createUserWithEmailAndPassword } from "firebase/auth";
+import { Dna } from  'react-loader-spinner'
 const SignUp  = ({}) => {
   
   const emailRef = useRef();
@@ -22,7 +23,7 @@ const SignUp  = ({}) => {
   const [loading, setLoading] = useState(false);
   const [photoURL, setPhotoURL] = useState("https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png");
   const [errorMessageCode,setErrorMeessageCode] = useState(null)
-
+  const [spin,setSpin] = useState(null)
   useEffect(() => {
     if(errorMessageCode){
       const timer = setTimeout(() => {
@@ -62,11 +63,27 @@ const SignUp  = ({}) => {
   
   const registerUser = async (email, name, password) => {
     try {
-      console.log("> Registering user")
-      
+      setSpin(true)
+
       const {
         user
-      } = await createUserWithEmailAndPassword(auth, email, password)
+      } = await createUserWithEmailAndPassword(auth, email, password).then(()=>{
+
+      })
+      .catch(err => {
+      setSpin(false)
+      let inform =" ";
+      if(err.message ==='Firebase: Error (auth/email-already-in-use).'){
+        inform = "Email already in use";
+      }
+      else if(err.message ==='Firebase: Password should be at least 6 characters (auth/weak-password).'){
+        inform = "Password should be at least 6 characters"
+      }
+
+      console.log(err.message);
+      setErrorMeessageCode(inform)
+
+    })
       navigate('/profile')
 
       setDoc(doc(db, "user", user.uid), {
@@ -79,12 +96,12 @@ const SignUp  = ({}) => {
       if(photo){
         await upload(photo, user, setLoading);
       }
-      
+
 
       console.log("> Updating profile")
       await updateProfile(user, {
         displayName: name,
-        
+
       });
       
     
@@ -124,7 +141,7 @@ const SignUp  = ({}) => {
     
   }
   return (
-  <div class="login-page">  
+  <div id="login-page">
     <div class="login-box">
       <h2>Sign Up</h2>
       <form>
@@ -152,8 +169,17 @@ const SignUp  = ({}) => {
           <label>User's nick name</label>
         </div>
 
-        <div className="user-box">
+        <div className="invisible-box">
            <p class="message">{errorMessageCode}</p>
+          {spin && <Dna
+              visible={true}
+              height="60"
+              width="60"
+              ariaLabel="blocks-loading"
+              wrapperStyle={{}}
+              wrapperClass="blocks-wrapper"
+              colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+            />}
         </div>
 
         <div class="btn-container">

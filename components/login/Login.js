@@ -1,41 +1,43 @@
 import React from 'react';
 import { useRef, useState,useEffect } from "react";
 
-import { signup, login, logout, useAuth } from "../../firebase";
 import './Login.css'
 
 import {  useNavigate} from 'react-router-dom';
 import { signInWithEmailAndPassword ,getAuth} from "firebase/auth";
 
+import { Dna } from  'react-loader-spinner'
 
 const Login  = () => {
-  
+
   const emailRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
   const auth = getAuth();
   const [errorMessageCode,setErrorMeessageCode] = useState(null)
-
+  const [spin,setSpin] = useState(null)
 
   useEffect(() => {
     if(errorMessageCode){
       const timer = setTimeout(() => {
-        
+
         setErrorMeessageCode('');
       }, 5000);
       return () => clearTimeout(timer);
     }
-    
+
   }, [errorMessageCode]);
 
-  async function handleLogin() {
-    
+  async function handleLogin(e) {
+    e.preventDefault()
+    setSpin(true)
     await signInWithEmailAndPassword(auth, emailRef.current.value, passwordRef.current.value).then((userCredential) => {
-    
+      setSpin(false)
       const user = userCredential.user;
       return navigate('/profile')
     })
     .catch(err => {
+      setSpin(false)
       let inform =" ";
       if(err.message ==='Firebase: Error (auth/wrong-password).'){
         inform = "Wrong password";
@@ -54,14 +56,14 @@ const Login  = () => {
       }
       console.log(err.message);
       setErrorMeessageCode(inform)
-      
+
     })
-    
+
   }
- 
-   
+
+
   return (
-  <div className="login-page">  
+  <div id="login-page">
     <div className="login-box">
       <h2>Login</h2>
       <form>
@@ -74,12 +76,22 @@ const Login  = () => {
           <label>Password</label>
         </div>
 
-        <div className="user-box">
-           <p class="message">{errorMessageCode}</p>
+        <div className="invisible-box">
+
+            {spin && <Dna
+              visible={true}
+              height="60"
+              width="60"
+              ariaLabel="blocks-loading"
+              wrapperStyle={{}}
+              wrapperClass="blocks-wrapper"
+              colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+            />}
+          <p class="message">{errorMessageCode}</p>
         </div>
-        
+
         <div class="btn-container">
-        
+
           <a className="style" onClick={handleLogin}>
             <span></span>
             <span></span>
@@ -87,7 +99,7 @@ const Login  = () => {
             <span></span>
                Submit
           </a>
-          
+
 
   
           <a className="style" onClick={()=>navigate('/signup')}>

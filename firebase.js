@@ -14,7 +14,7 @@ const firebaseConfig = {
   storageBucket: "test-b0548.appspot.com",
   messagingSenderId: "1044510370275",
   appId: "1:1044510370275:web:a3a0b98663581139de98d6",
-  databaseURL: "https://test-b0548-default-rtdb.asia-southeast1.firebasedatabase.app/"
+
 };
 
 

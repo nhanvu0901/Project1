@@ -25,14 +25,8 @@ const App =()=> {
             <Route exact path="/album" element={<Dashboard/>}/>
             <Route exact path="/search" element={<Preferences/>}/>
             {/* <Route path="" element={<Navigate to="/profile" replace />} /> */}
-            
           </Routes>
-        
-       
       </div>
     );
-
-
-
 }
 export default App
