@@ -22,7 +22,7 @@ const useStorage = (file,text,album) => {
   const [progress, setProgress] = useState(0);
   const auth = getAuth();
   const [imageUrl, setUrl] = useState(null);
-  const realTimeData = getDatabase();
+
  
   const userId = auth.currentUser.uid;
     // references
@@ -32,12 +32,14 @@ const useStorage = (file,text,album) => {
     const metadata = {
       contentType: 'image/jpeg/gif/png/mp4'
     };
-      const storageRef = ref(storage,userId+Date.now());
+    var idImageGenerate = Date.now().toString();
+      const storageRef = ref(storage,userId+idImageGenerate);
       console.log(file)
     const uploadTask = uploadBytesResumable(storageRef, file,metadata);
-    
-    
-    const imageRef = doc(db,album); // userid
+
+
+    console.log()
+    const imageRef = doc(db,"user",userId,"image",idImageGenerate); // userid
 
 
     uploadTask.on('state_changed',
@@ -46,8 +48,8 @@ const useStorage = (file,text,album) => {
       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       console.log('Upload is ' + progress + '% done');
 
-     
-    
+
+
       setProgress(progress);
       switch (snapshot.state) {
         case 'paused':
@@ -57,7 +59,7 @@ const useStorage = (file,text,album) => {
           console.log('Upload is running');
           break;
       }
-    }, 
+    },
     (error) => {
       // A full list of error codes is available at
       // https://firebase.google.com/docs/storage/web/handle-errors
@@ -72,18 +74,18 @@ const useStorage = (file,text,album) => {
           console.log("Unknown error occurred, inspect error.serverResponse")
           break;
       }
-    }, 
+    },
     () => {
-   
+
       // toast("🦄 Thêm ảnh thành công hehe !");
       // Upload completed successfully, now we can get the download URL
       getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
         console.log('File available at', downloadURL);
         setUrl(downloadURL);
-        
 
 
-      //   const docData = {   nested data generate unique id and 
+
+      //   const docData = {   nested data generate unique id and
       //                       inside is the data of that picture
       //     {
       //     {
@@ -100,8 +102,8 @@ const useStorage = (file,text,album) => {
           note:text,
           type:file.type,
           createdAt: serverTimestamp(),
-          user:userId
-          
+          user:userId,
+          idImage : idImageGenerate
         });  
   
       

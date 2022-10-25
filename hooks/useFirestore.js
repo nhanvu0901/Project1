@@ -7,12 +7,17 @@ import {
   query, 
   orderBy
 } from 'firebase/firestore';
+import { getAuth } from "firebase/auth";
 
 const useFirestore = (collectionName) => {
   const [docs, setDocs] = useState([]);
 
   useEffect(() => {
-    const ref = collection(db,collectionName);
+
+  const auth = getAuth();
+  const userId = auth.currentUser.uid;
+
+    const ref = collection(db,"user",userId,"image");
     const q = query(ref,orderBy('createdAt',"desc"))
     const unsub =  onSnapshot(q,(snapshot)=>{ // similiar to getDocs but this return real time data more pratical
       let books =[];
