@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil } from '@fortawesome/free-solid-svg-icons';
 import './Login.css'
 import { useNavigate } from 'react-router-dom';
-import  { collection, doc, setDoc } from "firebase/firestore"; 
+
 import {  upload } from "../../firebase";
 import { getAuth, updateProfile,createUserWithEmailAndPassword } from "firebase/auth";
 import { Dna } from  'react-loader-spinner'
@@ -48,7 +48,11 @@ const SignUp  = ({}) => {
    
     if (email && name && password && photo ) {
       registerUser(email, name, password).then(() => {
+          
+      
 
+
+        
       })
     }
     else{
@@ -64,7 +68,7 @@ const SignUp  = ({}) => {
       const {
         user
       } = await createUserWithEmailAndPassword(auth, email, password).catch(err => {
-
+     
       let inform =" ";
       if(err.message ==='Firebase: Error (auth/email-already-in-use).'){
         inform = "Email already in use";
@@ -78,17 +82,12 @@ const SignUp  = ({}) => {
       setErrorMeessageCode(inform)
       return null
     })
+     
 
-
-      setDoc(doc(db, "user", user.uid), {
-        uid:user.uid,
-        email:email,
-        name:name,
-        password:password
-      });
+     
 
       if(photo){
-        await upload(photo, user, setLoading);
+        await upload(photo, user, setLoading,email,name,password);
       }
 
 
@@ -97,8 +96,8 @@ const SignUp  = ({}) => {
         displayName: name,
 
       });
-
-
+      
+    
 
     } catch (e) {
       console.log(e)

@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react';
 import {
   setDoc,
   doc,
- collection,
-  addDoc,   // doc
- //return real time data
-  serverTimestamp, // order the database 
 
+  serverTimestamp, // order the database 
+  increment,
+  updateDoc,
+  FieldValue
 } from 'firebase/firestore'
 import {  ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
@@ -32,12 +32,14 @@ const useStorage = (file,text,album) => {
     const metadata = {
       contentType: 'image/jpeg/gif/png/mp4'
     };
-      const storageRef = ref(storage,userId+Date.now());
+    var idImageGenerate = Date.now().toString();
+      const storageRef = ref(storage,userId+idImageGenerate);
       console.log(file)
     const uploadTask = uploadBytesResumable(storageRef, file,metadata);
     
-    
-    const imageRef = doc(db,album); // userid
+   
+    console.log()
+    const imageRef = doc(db,"user",userId,"image",idImageGenerate); // userid
 
 
     uploadTask.on('state_changed',
@@ -100,10 +102,20 @@ const useStorage = (file,text,album) => {
           note:text,
           type:file.type,
           createdAt: serverTimestamp(),
-          user:userId
+          user:userId,
+          idImage : idImageGenerate,
           
         });  
-  
+        const docRef =doc(db,"user",userId);
+      
+        updateDoc(docRef,{
+          numOfPic: increment(1)
+        }).then(()=>{
+          console.log("Ok mf")
+         })
+         .catch(error=>{
+          console.log(error)
+         })
       
       });
 
