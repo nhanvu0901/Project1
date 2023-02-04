@@ -1,0 +1,76 @@
+.info-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    color: #ffff;
+}
+
+
+.avatar {
+    --border-color: #4255d4;
+    --background-color: #212752;
+    --avatar-size: 150px;
+    height: var(--avatar-size);
+    width: var(--avatar-size);
+    border: 4px solid var(--border-color);
+    padding: 6px;
+    border-radius: 50%;
+    position: relative;
+  }
+  .avatar::before, .avatar::after {
+    content: "";
+    position: absolute;
+    height: 6px;
+    width: 6px;
+    transform: rotate(45deg);
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  .avatar::before {
+    box-shadow: 0px 0px 0px transparent, 7rem * cos(45deg) 7rem * sin(45deg) #4255d4, 7rem * cos(90deg) 7rem * sin(90deg) #4255d4, 7rem * cos(135deg) 7rem * sin(135deg) #4255d4, 7rem * cos(180deg) 7rem * sin(180deg) #4255d4, 7rem * cos(225deg) 7rem * sin(225deg) #4255d4, 7rem * cos(270deg) 7rem * sin(270deg) #4255d4, 7rem * cos(315deg) 7rem * sin(315deg) #4255d4, 7rem * cos(360deg) 7rem * sin(360deg) #4255d4;
+    animation: animate-2 1s ease-in-out infinite;
+  }
+  .avatar::after {
+    box-shadow: 0px 0px 0px transparent, 6rem * cos(22.5deg) 6rem * sin(22.5deg) #4255d4, 6rem * cos(45deg) 6rem * sin(45deg) #4255d4, 6rem * cos(67.5deg) 6rem * sin(67.5deg) #4255d4, 6rem * cos(90deg) 6rem * sin(90deg) #4255d4, 6rem * cos(112.5deg) 6rem * sin(112.5deg) #4255d4, 6rem * cos(135deg) 6rem * sin(135deg) #4255d4, 6rem * cos(157.5deg) 6rem * sin(157.5deg) #4255d4, 6rem * cos(180deg) 6rem * sin(180deg) #4255d4, 6rem * cos(202.5deg) 6rem * sin(202.5deg) #4255d4, 6rem * cos(225deg) 6rem * sin(225deg) #4255d4, 6rem * cos(247.5deg) 6rem * sin(247.5deg) #4255d4, 6rem * cos(270deg) 6rem * sin(270deg) #4255d4, 6rem * cos(292.5deg) 6rem * sin(292.5deg) #4255d4, 6rem * cos(315deg) 6rem * sin(315deg) #4255d4, 6rem * cos(337.5deg) 6rem * sin(337.5deg) #4255d4, 6rem * cos(360deg) 6rem * sin(360deg) #4255d4;
+    transform: rotate(12deg);
+    animation: animate-1 1s ease-in-out infinite;
+  }
+  .avatar img {
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+  }
+  @keyframes animate-1 {
+    0%, 100% {
+      box-shadow: 0px 0px 0px transparent, 6rem * cos(22.5deg) 6rem * sin(22.5deg) #4255d4, 6rem * cos(45deg) 6rem * sin(45deg) #4255d4, 6rem * cos(67.5deg) 6rem * sin(67.5deg) #4255d4, 6rem * cos(90deg) 6rem * sin(90deg) #4255d4, 6rem * cos(112.5deg) 6rem * sin(112.5deg) #4255d4, 6rem * cos(135deg) 6rem * sin(135deg) #4255d4, 6rem * cos(157.5deg) 6rem * sin(157.5deg) #4255d4, 6rem * cos(180deg) 6rem * sin(180deg) #4255d4, 6rem * cos(202.5deg) 6rem * sin(202.5deg) #4255d4, 6rem * cos(225deg) 6rem * sin(225deg) #4255d4, 6rem * cos(247.5deg) 6rem * sin(247.5deg) #4255d4, 6rem * cos(270deg) 6rem * sin(270deg) #4255d4, 6rem * cos(292.5deg) 6rem * sin(292.5deg) #4255d4, 6rem * cos(315deg) 6rem * sin(315deg) #4255d4, 6rem * cos(337.5deg) 6rem * sin(337.5deg) #4255d4, 6rem * cos(360deg) 6rem * sin(360deg) #4255d4;
+    }
+    50% {
+      box-shadow: 0px 0px 0px transparent, 5.5rem * cos(22.5deg) 5.5rem * sin(22.5deg) #4255d4, 5.5rem * cos(45deg) 5.5rem * sin(45deg) #4255d4, 5.5rem * cos(67.5deg) 5.5rem * sin(67.5deg) #4255d4, 5.5rem * cos(90deg) 5.5rem * sin(90deg) #4255d4, 5.5rem * cos(112.5deg) 5.5rem * sin(112.5deg) #4255d4, 5.5rem * cos(135deg) 5.5rem * sin(135deg) #4255d4, 5.5rem * cos(157.5deg) 5.5rem * sin(157.5deg) #4255d4, 5.5rem * cos(180deg) 5.5rem * sin(180deg) #4255d4, 5.5rem * cos(202.5deg) 5.5rem * sin(202.5deg) #4255d4, 5.5rem * cos(225deg) 5.5rem * sin(225deg) #4255d4, 5.5rem * cos(247.5deg) 5.5rem * sin(247.5deg) #4255d4, 5.5rem * cos(270deg) 5.5rem * sin(270deg) #4255d4, 5.5rem * cos(292.5deg) 5.5rem * sin(292.5deg) #4255d4, 5.5rem * cos(315deg) 5.5rem * sin(315deg) #4255d4, 5.5rem * cos(337.5deg) 5.5rem * sin(337.5deg) #4255d4, 5.5rem * cos(360deg) 5.5rem * sin(360deg) #4255d4;
+    }
+  }
+  @keyframes animate-2 {
+    0%, 100% {
+      box-shadow: 0px 0px 0px transparent, 5.5rem * cos(45deg) 5.5rem * sin(45deg) #4255d4, 5.5rem * cos(90deg) 5.5rem * sin(90deg) #4255d4, 5.5rem * cos(135deg) 5.5rem * sin(135deg) #4255d4, 5.5rem * cos(180deg) 5.5rem * sin(180deg) #4255d4, 5.5rem * cos(225deg) 5.5rem * sin(225deg) #4255d4, 5.5rem * cos(270deg) 5.5rem * sin(270deg) #4255d4, 5.5rem * cos(315deg) 5.5rem * sin(315deg) #4255d4, 5.5rem * cos(360deg) 5.5rem * sin(360deg) #4255d4;
+    }
+    50% {
+      box-shadow: 0px 0px 0px transparent, 6rem * cos(45deg) 6rem * sin(45deg) #4255d4, 6rem * cos(90deg) 6rem * sin(90deg) #4255d4, 6rem * cos(135deg) 6rem * sin(135deg) #4255d4, 6rem * cos(180deg) 6rem * sin(180deg) #4255d4, 6rem * cos(225deg) 6rem * sin(225deg) #4255d4, 6rem * cos(270deg) 6rem * sin(270deg) #4255d4, 6rem * cos(315deg) 6rem * sin(315deg) #4255d4, 6rem * cos(360deg) 6rem * sin(360deg) #4255d4;
+    }
+  }
+  
+
+.user-info-container{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+.user-info p{
+   padding-bottom: 10px;
+}

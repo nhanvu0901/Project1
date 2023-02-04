@@ -1,0 +1,183 @@
+.Header {
+    position: fixed;
+    top: 0; /* Stick it to the top */
+    height: 60px;
+    width: 100vw;
+    z-index: 1000;
+    display: grid;
+    grid-template-areas: "logo nav";
+    font-family: 'Lobster', cursive;
+    /* Cosmetics */
+    background-color: #282c34;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+  .Header.sticky{
+   height: 50px;
+  }
+  .Logo {
+    grid-area: logo;
+    height: 70px;
+  }
+  
+  .Nav {
+    
+    display: grid;
+    grid-area: nav;
+    grid-template-columns: repeat(6, auto);
+    align-items: center;
+    justify-items: center;
+  }
+  .Nav a {
+    color: #9500ff;
+    font-size: 20px;
+    font-weight: 500;
+    transition: 0.5s;
+    text-decoration: none;
+  }
+  .Nav a:hover {
+    transform: scale(1.1);
+  }
+  .Nav button {
+    padding: 10px;
+    outline: none;
+    border: none;
+    font-size: 20px;
+    color: #fff;
+    font-weight: 600;
+    background-color: rgba(255, 0, 0, 0.5);
+    box-shadow: 0px 5px 0px 0px rgba(255, 0, 0, 0.25);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 70ms;
+  }
+  
+  .Nav button:active {
+    transform: translateY(3px);
+    box-shadow: 0px 2px 0px 0px rgba(255, 0, 0, 0.25);
+  }
+  
+  .Burger {
+    display: none;
+    grid-area: burger;
+    margin: 0 20px 0 0;
+    padding: 0;
+    justify-self: end;
+    font-size: 40px;
+    border: none;
+    background: none;
+    outline: none;
+    transition: 0.1s;
+  }
+  .Burger:active {
+    transform: scale(1.2);
+  }
+  
+  @media (max-width: 700px) {
+    .Header {
+      grid-template-areas: "logo burger" "nav nav";
+    }
+    .Nav {
+      grid-template-rows: repeat(4, auto);
+      grid-template-columns: none;
+      grid-row-gap: 20px;
+  
+      padding: 30px 0 30px;
+      background: rgba(40, 44, 47, 0.95);
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      margin-top: 2rem;
+    }
+    .Burger {
+      position: absolute;
+      display: block;
+      top: 0px;
+      right: -110spx;
+    }
+  }
+  
+  .NavAnimation-enter {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  .NavAnimation-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 350ms, transform 350ms;
+  }
+  .NavAnimation-exit {
+    opacity: 1;
+  }
+  .NavAnimation-exit-active {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 350ms, transform 350ms;
+  }
+
+
+
+
+.on-active{
+  
+  background-color: #ffff;
+  border-radius: 10px;
+  color: #212529;
+}
+.off-active{
+  color: #fff;
+}
+.logo{
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo .neon{
+  cursor: pointer;
+  font-size: 1.3rem;
+  color: #fff;
+  text-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 21px #bc13fe,
+    0 0 42px #bc13fe,
+    0 0 82px #bc13fe,
+    0 0 92px #bc13fe,
+    0 0 102px #bc13fe,
+    0 0 151px #bc13fe;
+}
+.logo h3 {
+  font-size: 6.2rem;
+  animation: flicker 1.5s infinite alternate;  
+  border: 0.2rem solid #fff;
+  border-radius: 10px ;
+  padding: 0.4em;
+  box-shadow: 0 0 .2rem #fff,
+            0 0 .2rem #fff,
+            0 0 2rem #bc13fe,
+            0 0 0.8rem #bc13fe,
+            0 0 2.8rem #bc13fe,
+            inset 0 0 1.3rem #bc13fe; 
+}
+
+/* Flickering animation */
+@keyframes flicker {
+    
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+
+      text-shadow:
+      0 0 4px #fff,
+      0 0 11px #fff,
+      0 0 19px #fff,
+      0 0 40px #bc13fe,
+      0 0 80px #bc13fe,
+      0 0 90px #bc13fe,
+      0 0 100px #bc13fe,
+      0 0 150px #bc13fe;
+  
+  }
+  
+  20%, 24%, 55% {        
+      text-shadow: none;
+  }    
+}
